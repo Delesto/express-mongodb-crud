@@ -3,5 +3,14 @@ html(lang="ru")
     head
         include includes/head.pug
     body#error
-        h1 #{err.status}
-        p #{err.message}
+        
+        div.error-container
+            if status === 404
+                h1.error-status #{status}
+                p.error-message #{message}
+                button.error-back Назад
+            else
+                h1.error-status #{status}
+                p.error-message #{message}
+    include includes/scripts
+    script(src="/js/backFrom404.js")

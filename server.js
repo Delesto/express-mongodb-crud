@@ -1,13 +1,16 @@
+const path = require('path');
 const express = require('express');
+const config = require('./config');
 const bodyParser = require('body-parser');
 const createError = require('http-errors');
-const config = require('./config');
-const path = require('path');
-
+const cookieParser = require('cookie-parser');
+const rusErrorMessages = require('./errors/index');
+console.log(rusErrorMessages)
 const app = express();
 // app.use(sendHttpError);
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -26,7 +29,11 @@ app.use((req, res, next) => {
 });
 //Error handling
 app.use((err, req, res, next) => {
-    res.render('error', { err: createError(err.status || 500) });
+    res.render('error', {
+        status: createError(err.status || 500).status,
+        message: rusErrorMessages[createError(err.status).status] 
+        || createError(err.status).message 
+    });
 });
 
 app.listen(config.app.port, config.app.url, () => {

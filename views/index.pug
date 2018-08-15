@@ -2,8 +2,12 @@
 html(lang="ru")
     head
         include includes/head.pug
-    body#index
-        h1 Hello! This is express app
+    body
+        include includes/header.pug
+        section.content
+            div.container
+                p Вы успешно авторизованы!
 
-        include includes/scripts
-        
+        include includes/footer.pug        
+        script(src="/libs/jquery/dist/jquery.min.js")
+        script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
