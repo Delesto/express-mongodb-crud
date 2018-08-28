@@ -1,0 +1,27 @@
+.language-box-container {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    transform: translateY(-50%);
+    outline: none;
+}
+
+.language-box {
+    position: fixed;
+    right: 0;
+}
+
+.language-box:hover svg {
+    fill: #fff;
+    transition: all .15s ease-in-out;
+}
+
+.languages {
+    right: -100%;
+}
+
+.languages .btn {
+    padding: 12px;
+}

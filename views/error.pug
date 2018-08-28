@@ -13,4 +13,5 @@ html(lang="ru")
                 h1.error-status #{status}
                 p.error-message #{message}
     include includes/scripts
-    script(src="/js/backFrom404.js")
+    if status !== 500
+        script(src="/js/backFrom404.js")

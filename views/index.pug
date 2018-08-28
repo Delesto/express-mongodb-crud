@@ -3,11 +3,13 @@ html(lang="ru")
     head
         include includes/head.pug
     body
-        include includes/header.pug
+        include includes/languageBox.pug        
+        include mixins/header.pug
+        +header(user)
         section.content
             div.container
-                p Вы успешно авторизованы!
-
-        include includes/footer.pug        
-        script(src="/libs/jquery/dist/jquery.min.js")
-        script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
+                p Главная страница
+        include includes/footer.pug
+        include includes/scripts.pug
+        script(src="/js/index.js")
+        script(src="/js/logout.js")
