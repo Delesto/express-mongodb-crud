@@ -21,6 +21,37 @@ const User = new Schema({
         type: String,
         required: true
     },
+    phone: {
+        type: String,
+        required: false,
+        default: 'Телефон не указан'
+    },
+    city: {
+        type: String,
+        required: false,
+        default: 'Город не указан'
+    },
+    avatar: {
+        type: Boolean 
+    },
+    age: {
+        type: String,
+        default: 'Возраст не указан'
+    },
+    resume: {
+        type: String,
+        required: false,
+        default: 'Информация отсутствует'
+    },
+    position: {
+        type: String,
+        default: 'Должность не указана'
+    },
+    isAdmin: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     created: {
         type: Date,
         default: Date.now
@@ -46,13 +77,17 @@ User.pre('save', function (next) {
 //Compare user and strored pass 
 User.methods.comparePassword = function (candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function (err, res) {
-        if(err) cb(err);
-        cb(null, res);
+        if (err) cb(err);
+        cb(null, res); //if success, add user._id to session
     });
 };
 
 User.path('email').validate((email) => {
     return validator.isEmail(email);
-}, 'Incorrect email');
+}, 'email');
+
+User.path('resume').validate((resume) => {
+    return resume.length > 200 ? false : true;
+}, 'resume');
 
 module.exports = mongoose.model('User', User);

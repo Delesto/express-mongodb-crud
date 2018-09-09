@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'PT-Sans';
+  src: url('/fonts/PT_Sans-Web-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'PT-SansBold';
+  src: url('/fonts/PT_Sans-Web-Bold.ttf');
+}
+
 html,
 body {
   height: 100%;
@@ -6,6 +16,20 @@ body {
 body {
   background-color: #f5f5f5;
   position: relative;
+  color: #5b5b5b;
+  font-family: 'PT-Sans';
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.no-gutters {
+  margin-right: 0; 
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .auth-form {
@@ -39,7 +63,7 @@ body {
 
 #signup input[type="email"] {
   border-radius: 0;
-  margin-bottom: -1px;
+  /* margin-bottom: -1px; */
 }
 
 #signin input[type="email"] {
@@ -55,7 +79,6 @@ body {
 }
 
 /* Error page */
-
 #error {
   background-color: #333;
   display: flex;
@@ -98,9 +121,7 @@ body {
 }
 
 /* Error page */
-
 /* Index page */
-
 .header {
   margin-bottom: 40px;
 }
@@ -109,14 +130,13 @@ body {
   font-size: 1.2rem;
 }
 
-.footer {
-  color: #fff;
-}
+.footer {}
 
 .footer {
-  width: 100%;
   position: fixed;
   bottom: 0;
+  color: #fff;
+  width: 100%;
 }
 
 .footer p {
@@ -146,3 +166,189 @@ body {
 }
 
 /* Index page */
+#index .user-profile-item {
+  margin-bottom: 20px;
+}
+
+#index .user-sity {
+  display: block;
+  margin-bottom: 20px;
+}
+
+#index .user-name {
+  font-size: 1.1rem;
+}
+
+/* User page */
+#user .user-name-container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+#user .user-name-container {
+  font-size: 1.1rem;
+  box-sizing: border-box;
+}
+
+#user .user-name {
+  font-family: 'PT-SansBold';
+}
+
+#user .user-sity {
+  display: block;
+}
+
+#user .user-info-container {
+  box-sizing: border-box;
+  background-color: #fff;
+  width: 100%;
+  border-radius: 4px;
+}
+
+#user .user-info-label {
+  display: block;
+  font-size: 1.1rem;
+  font-family: 'PT-SansBold';
+  margin-bottom: 20px;
+}
+
+#user .user-contacts-container {
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+#user .user-contact-label {
+  display: block;
+  font-size: 1.1rem;
+  font-family: 'PT-SansBold';
+}
+
+#user .user-position-label {
+  display: block;
+  font-family: 'PT-SansBold';
+  margin-bottom: 20px;
+}
+
+#user .user-email {
+  display: block;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+#user .user-phone {
+  display: block;
+  position: relative;
+}
+
+#user .contact-data {
+  margin-left: 30px;
+}
+
+#user .user-avatar-container {
+  margin-bottom: 20px;
+}
+
+#user .contact-data span::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#user .user-email::before {
+  width: 21px;
+  height: 17px;
+  background: url('/imgs/message.svg') no-repeat center;
+}
+
+#user .user-phone::before {
+  width: 16px;
+  height: 16px;
+  left: -28px !important;
+  background: url('/imgs/phone.svg') no-repeat center;
+}
+
+/*User settings page*/
+#user-settings .user-avatar-container {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#user-settings .footer {
+  position: relative;
+}
+
+#user-settings .user-avatar-container input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+#user-settings .content {
+  margin-bottom: 10px;
+}
+
+#user-settings #avatar-form {
+  width: 100%;
+  height: 200px;
+  left: 0;
+  top: 0;
+  background-color: #007bff;
+  opacity: 0.7;
+}
+
+#user-settings #avatar-form label {
+  cursor: pointer;
+}
+
+#user-settings #user-avatar {
+  cursor: pointer;
+}
+
+/* #user-settings .user-avatar-container label {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #007bff;
+  opacity: 0.7;
+} */
+
+#user-settings .user-settings-block {
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 30px;
+}
+
+#user-settings .user-settings-container {
+  margin-bottom: 20px;
+}
+
+#user-settings .user-settings-container:last-child {
+  margin-bottom: 0;
+}
+
+#user-settings input::placeholder {
+  color: #ABABAB;
+}
+
+#user-settings .user-avatar-container label::before {
+  width: 100px;
+  height: 100px;
+  content: '';
+  display: block;
+  background: url('./imgs/upload.svg');
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}

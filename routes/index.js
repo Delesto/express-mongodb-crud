@@ -1,13 +1,23 @@
+const createError = require('http-errors');
 const router = require('express').Router();
+const User = require('../models/user');
 
-router.get('/', (req, res) => {
-    if(req.user) {
-        res.render('index', {
-            user: req.user
-        });
+router.get('/', (req, res, next) => {
+    const user = req.user;
+    if(user) {
+        User.find({})
+            .exec((err, users) => {
+                if(err) {
+                    next(createError());
+                }
+
+                res.render('index', {
+                    user,
+                    users
+                })
+            });
     } else {
-        res.render('index');
+        res.redirect('/signin');
     }
 });
-
 module.exports = router;

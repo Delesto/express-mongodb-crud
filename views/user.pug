@@ -2,12 +2,36 @@
 html(lang="ru")
     head
         include includes/head.pug
-    body#signup
-        include includes/languageBox.pug
+    body#user
         include mixins/header.pug
         +header(user)
-        section.content
-
-        include includes/footer.pug     
-        include includes/scripts
+        div.content
+            div.container
+                div.row
+                    div.col-3
+                        div(class="user-avatar-container d-flex justify-content-center")
+                            -var img = "/uploads/" + foundUser._id + ".jpg" 
+                            if user.avatar
+                                img(src=img class="user-avatar-img")
+                            else
+                                img(src="/imgs/avatar.jpg" class="user-avatar-img")
+                        div(class="user-name-container p-4")
+                            span.user-name #{foundUser.name}, 
+                            span.user-age #{foundUser.age}
+                            span.user-sity #{foundUser.city}
+                                
+                    div.col-5
+                        div(class="user-info-container p-4")
+                            span.user-info-label Информация
+                            p #{foundUser.resume} 
+                    div.col-4
+                        div(class="user-contacts-container p-4")
+                            span.user-contact-label Контакты
+                            span.user-position-label #{foundUser.position}
+                            div(class="contact-data")
+                                span.user-email #{foundUser.email}
+                                span.user-phone #{foundUser.phone}
+        include includes/footer.pug
+        include includes/scripts.pug
         script(src="/js/index.js")
+        script(src="/js/logout.js")

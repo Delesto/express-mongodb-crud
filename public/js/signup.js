@@ -1,9 +1,8 @@
 $(document).ready(function () {
-    function flagError() {
+    function flagError(res) {
         $('.auth-form input[type="email"]').addClass('is-invalid')
         $('.validation-error.email-status').text(res.responseJSON.message);
     }
-
     $('#signup-form').submit(function (e) {
         e.preventDefault();
         $.ajax({
@@ -20,10 +19,10 @@ $(document).ready(function () {
                     document.location.pathname = '/';
                 },
                 400: function (res) {
-                    flagError();
+                    flagError(res);
                 },
                 422: function (res) {
-                    flagError();
+                    flagError(res);
                 },
             }
         });

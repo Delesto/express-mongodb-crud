@@ -1,4 +1,5 @@
 const path = require('path');
+const multer = require('multer');
 const express = require('express');
 const config = require('./config');
 const mongoose = require('mongoose');
@@ -21,9 +22,11 @@ mongoose.connection.on("error", (err) => {
 });
 
 const app = express();
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', './views');
-app.set('view engine', 'pug');
+app.set('views', './views'); //Directory for templates
+app.set('view engine', 'pug'); //Set template engine
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -43,15 +46,15 @@ const index = require('./routes/index');
 const signin = require('./routes/signin');
 const signup = require('./routes/signup');
 const logout = require('./routes/logout');
-// const users = require('./routes/users');
+const user = require('./routes/user');
 const admin = require('./routes/admin');
 
 app.use('/', index);
 app.use('/signin', signin);
 app.use('/signup', signup);
-app.use('/admin', admin);
 app.use('/logout', logout);
-// app.use('/users', users);
+app.use('/admin', admin);
+app.use('/user', user);
 
 //Handle 404 error
 app.use((req, res, next) => {

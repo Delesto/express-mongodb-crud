@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+html(lang="ru")
+    head
+        include includes/head.pug
+    body#user-settings
+        include includes/languageBox.pug
+        include mixins/header.pug
+        +header(user)
+        section.content
+            div.container
+                div.row
+                    div.col-md-3
+                        div(class="user-avatar-container d-flex justify-content-center")
+                            form(id="avatar-form")
+                                label(for="user-avatar")
+                                input(type="file" id="user-avatar" name="user-avatar")
+                        a(href="/" class="btn btn btn-outline-primary btn-block restet") Отменить
+                        button(class="btn btn btn-outline-primary btn-block save") Сохранить
+                    div.col-md-9
+                        div.user-other-data
+                            form(method="POST" enctype="multipart/form-data" id="user-data-form")
+                                div(class="user-settings-block p-4")
+                                    div.user-settings-container
+                                        label(for="username") Имя
+                                        input(type="text" id="username" name="username" class="form-control" placeholder="Ваше имя" value="" + user.name)
+                                    div.user-settings-container
+                                        label(for="username") Телефон
+                                        input(type="phone" id="userphone" name="userphone" class="form-control" placeholder="Ваш номер телефона" value="" + user.phone)
+                                div(class="user-settings-block p-4")
+                                    div.user-settings-container
+                                        label(for="useremail") Email
+                                        input(type="text" id="useremail" name="useremail" class="form-control" placeholder="Ваш email" value="" + user.email)
+                                    div.user-settings-container
+                                        label(for="userpass") Пароль
+                                        input(type="password" id="userpass" name="userpass" class="form-control" placeholder="Введите новый пароль")
+                                div(class="user-settings-block p-4")
+                                    div.user-settings-container
+                                        label(for="userAge") Возраст
+                                        input(type="text" id="userAge" name="userAge" class="form-control" placeholder="Род деятельности" value="" + user.age)
+                                    div.user-settings-container
+                                        label(for="userPosition") Должность
+                                        input(type="text" id="userPosition" name="userPosition" class="form-control" placeholder="Род деятельности" value="" + user.position)
+                                    div.user-settings-container
+                                        label(for="userCity") Город
+                                        input(type="text" id="userCity" name="userCity" class="form-control" placeholder="Город проживания" value="" + user.city)
+                                    div.user-settings-container
+                                        label(for="userAboutText") О себе
+                                        textarea(name="userAboutText", id="userAboutText" cols="20", rows="5" class="form-control") #{user.resume}
+
+        include includes/footer.pug     
+        include includes/scripts
+        script(src="/js/index.js")
+        script(src="/js/logout.js")
+        

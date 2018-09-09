@@ -2,13 +2,36 @@
 html(lang="ru")
     head
         include includes/head.pug
-    body
+    body#index
         include includes/languageBox.pug        
         include mixins/header.pug
         +header(user)
         section.content
-            div.container
-                p Главная страница
+            div(class="container")
+                div.row
+                    if users.length
+                        each current in users
+                            div(class="col-6 user-profile-item no-gutters")
+                                div(class="container")
+                                    div.row
+                                        div.col-6
+                                            div(class="user-avatar d-flex justify-content-center")
+                                                a(href="/user/" + current._id)
+                                                    -var img = "/uploads/" + current._id + ".jpg" 
+                                                    if current.avatar
+                                                        img(src=img class="user-avatar-img")
+                                                    else
+                                                        img(src="/imgs/avatar.jpg" class="user-avatar-img")
+
+                                        div(class="col-6 d-flex align-items-center")
+                                            div.user-info
+                                                span.user-name
+                                                    a(href="/user/" + current._id)
+                                                        b= current.name
+                                                span.user-age= ', ' + (current.age)
+                                                span.user-sity= current.city
+                                                p= current.resume
+        
         include includes/footer.pug
         include includes/scripts.pug
         script(src="/js/index.js")

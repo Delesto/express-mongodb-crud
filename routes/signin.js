@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
             //Если найден...
             if (user) {
                 //Проверяем введенный пароль
-                user.comparePassword(req.body.pass, (err, isMatch) => {
+                user.comparePassword(req.body.pass, (err, isMatch) => { //Если все верно, в req будет добавлен id пользователя
                     if (err) { return next(new PostError()); } //500 error
                     if (!isMatch) {
                         next(new PostError(400, 'Неверный пароль'));

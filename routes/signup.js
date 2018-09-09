@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const MongoError = require('mongodb').MongoError;
 const User = require('../models/user');
 const PostError = require('../errors/postError.js');
 
@@ -14,32 +13,28 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const user = User({
         name: req.body.name,
-        email: req.body.email,
-        password: req.body.pass //There will be hashed password!
+        email: req.body.email, 
+        password: req.body.password, //There will be hashed password!
     });
     //Сохранение нового пользователя в db при регистрации
-    user.save((err) => {
+    user.save(function(err) {
         if(err) {
-            if (err instanceof MongoError) {
+            if(err.name === 'MongoError') {
                 next(new PostError(400, 'Такой email уже существует'));
-            } else {
-                if (err.errors.email.$isValidatorError) {
+            } else if(err.name === 'ValidationError') {
+                if(err.errors.email) {
                     next(new PostError(422, 'Некорректный email'));
                 }
+            } else {
+                next(new PostError());
             }
+        } else {
+            //Если ошибок нет
+            //Запись в документ коллекции session id нового пользователя
+            req.session.userId = user._id;
+            res.send('ok');
         }
-        //Запись в документ коллекции session id нового пользователя
-        req.session.userId = user._id;
-        res.send('ok');
     });
 });
 
 module.exports = router;
-
-//1. При регистрации пользователя, в базе данных создается документ в коллекции
-// session, а так же ставитья кука в браузер.
-//2. Далле этот документ доступен как req.session. У каждого пользователя он свой
-//3. В req.session записываем id зарегестрированного пользователя
-//4. При новых запросах проверяем, есть ли у пользователя sid кука
-//5. Если да, то проверяем, содержится ли документ с таким же id в базе
-//6. Если да, то извлекаем юзера из базы по userID данной сессии 

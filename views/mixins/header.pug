@@ -11,7 +11,7 @@ mixin header(user)
             div
                 if user
                     span.username Привет, 
-                        a(href="#") #{user.name}
+                        a(href="/user/settings") #{user.name}
                     form(class="logout")
                         input(type="submit" value="Выйти" class="btn btn-outline-primary m-1")
                 else
